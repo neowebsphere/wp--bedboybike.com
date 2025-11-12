@@ -54,6 +54,11 @@ function badboybike_scripts() {
     wp_enqueue_script('badboybike-modal', get_template_directory_uri() . '/js/modal.js', array(), '1.0.0', true);
     wp_enqueue_script('badboybike-main', get_template_directory_uri() . '/js/main.js', array(), '1.0.0', true);
     
+    // Lightbox only on Gallery template
+    if (is_page_template('template-gallery.php')) {
+        wp_enqueue_script('badboybike-lightbox', get_template_directory_uri() . '/js/lightbox.js', array(), '1.0.0', true);
+    }
+    
     // Localize script with WordPress data
     wp_localize_script('badboybike-gallery', 'badboybike_data', array(
         'ajax_url' => admin_url('admin-ajax.php'),
@@ -411,8 +416,9 @@ function badboybike_get_motorcycles_data() {
 function badboybike_enqueue_media_uploader($hook) {
     if ('post.php' === $hook || 'post-new.php' === $hook) {
         global $post;
-        if ('motorcycle' === $post->post_type) {
+        if (isset($post) && 'motorcycle' === $post->post_type) {
             wp_enqueue_media();
+            wp_enqueue_script('jquery');
         }
     }
 }
@@ -420,11 +426,18 @@ add_action('admin_enqueue_scripts', 'badboybike_enqueue_media_uploader');
 
 // Add motorcycles data to footer for JavaScript
 function badboybike_footer_scripts() {
-    if (is_front_page() || is_page_template('template-home.php')) {
+    if (is_front_page() || is_home() || is_page_template('template-home.php')) {
         $motorcycles = badboybike_get_motorcycles_data();
         ?>
         <script>
         var motorcyclesData = <?php echo json_encode($motorcycles); ?>;
+        </script>
+        <?php
+    } else {
+        // Always define motorcyclesData to prevent JS errors
+        ?>
+        <script>
+        var motorcyclesData = [];
         </script>
         <?php
     }

@@ -2,7 +2,7 @@
 class Gallery {
   constructor() {
     this.galleryGrid = document.getElementById('galleryGrid');
-    this.motorcycles = motorcyclesData; // From motorcycles-data.js
+    this.motorcycles = typeof motorcyclesData !== 'undefined' ? motorcyclesData : [];
     
     this.init();
   }

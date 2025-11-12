@@ -1,3 +1,8 @@
 [11-Nov-2025 21:47:48 UTC] PHP Warning:  Attempt to read property "title" on null in F:\WP_LOCAL_SITES\bedboybikecom\app\public\wp-includes\class-wp-customize-widgets.php on line 926
 [12-Nov-2025 13:03:38 UTC] PHP Warning:  Attempt to read property "title" on null in F:\WP_LOCAL_SITES\bedboybikecom\app\public\wp-includes\class-wp-customize-widgets.php on line 926
 [12-Nov-2025 13:03:44 UTC] PHP Warning:  Attempt to read property "title" on null in F:\WP_LOCAL_SITES\bedboybikecom\app\public\wp-includes\class-wp-customize-widgets.php on line 926
+[12-Nov-2025 20:42:12 UTC] PHP Warning:  Attempt to read property "title" on null in F:\WP_LOCAL_SITES\bedboybikecom\app\public\wp-includes\class-wp-customize-widgets.php on line 926
+[12-Nov-2025 20:50:35 UTC] PHP Warning:  Attempt to read property "title" on null in F:\WP_LOCAL_SITES\bedboybikecom\app\public\wp-includes\class-wp-customize-widgets.php on line 926
+[12-Nov-2025 21:37:36 UTC] PHP Warning:  Attempt to read property "title" on null in F:\WP_LOCAL_SITES\bedboybikecom\app\public\wp-includes\class-wp-customize-widgets.php on line 926
+[12-Nov-2025 21:46:36 UTC] PHP Warning:  Attempt to read property "title" on null in F:\WP_LOCAL_SITES\bedboybikecom\app\public\wp-includes\class-wp-customize-widgets.php on line 926
+[12-Nov-2025 21:48:52 UTC] PHP Warning:  Attempt to read property "title" on null in F:\WP_LOCAL_SITES\bedboybikecom\app\public\wp-includes\class-wp-customize-widgets.php on line 926

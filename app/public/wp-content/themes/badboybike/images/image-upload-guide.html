@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Как добавить изображения для Hero секции</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #fff;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 900;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .method {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .method h2 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .method-icon {
+            font-size: 1.5em;
+        }
+        
+        .steps {
+            list-style: none;
+            counter-reset: step-counter;
+        }
+        
+        .steps li {
+            counter-increment: step-counter;
+            position: relative;
+            padding-left: 50px;
+            margin-bottom: 20px;
+        }
+        
+        .steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        
+        .code {
+            background: #1a1a1a;
+            color: #4ade80;
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        
+        .specs {
+            background: #e7f3ff;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .specs h3 {
+            color: #0066cc;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .spec-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .spec-item {
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid #0066cc;
+        }
+        
+        .spec-label {
+            font-weight: bold;
+            color: #0066cc;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+        }
+        
+        .spec-value {
+            color: #333;
+        }
+        
+        .tips {
+            background: #fff9e6;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #ffc107;
+        }
+        
+        .tips h3 {
+            color: #ff9800;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .tip-list {
+            list-style: none;
+        }
+        
+        .tip-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .tip-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #4caf50;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .avoid-list li::before {
+            content: '✗';
+            color: #f44336;
+        }
+        
+        .warning {
+            background: #fff3f3;
+            border-left: 5px solid #f44336;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .success {
+            background: #f1f8f4;
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .footer {
+            background: #1a1a1a;
+            color: #fff;
+            text-align: center;
+            padding: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .method {
+                padding: 20px;
+            }
+            
+            .spec-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏍️ Гайд по добавлению изображений</h1>
+            <p>Для Hero секции страницы мотоцикла</p>
+        </div>
+        
+        <div class="content">
+            <!-- Method 1 -->
+            <div class="method">
+                <h2>
+                    <span class="method-icon">📤</span>
+                    Способ 1: Через WordPress (Рекомендуется)
+                </h2>
+                
+                <ul class="steps">
+                    <li>
+                        <strong>Войдите в админ-панель</strong><br>
+                        Откройте <code>http://ваш-сайт.com/wp-admin</code>
+                    </li>
+                    <li>
+                        <strong>Перейдите к посту мотоцикла</strong><br>
+                        Записи → Motorcycles → Выберите нужный мотоцикл
+                    </li>
+                    <li>
+                        <strong>Установите избранное изображение</strong><br>
+                        В правой панели: "Избранное изображение" → "Установить избранное изображение"
+                    </li>
+                    <li>
+                        <strong>Загрузите фото</strong><br>
+                        Выберите файл с компьютера или из медиатеки
+                    </li>
+                    <li>
+                        <strong>Сохраните изменения</strong><br>
+                        Нажмите кнопку "Обновить"
+                    </li>
+                </ul>
+                
+                <div class="success">
+                    <strong>✅ Готово!</strong> Изображение автоматически появится на странице мотоцикла с красивым parallax-эффектом!
+                </div>
+            </div>
+            
+            <!-- Method 2 -->
+            <div class="method">
+                <h2>
+                    <span class="method-icon">🖼️</span>
+                    Способ 2: Резервное изображение
+                </h2>
+                
+                <p>Если вы хотите установить изображение по умолчанию для всех мотоциклов без избранного изображения:</p>
+                
+                <div class="code">
+                    📁 Путь: /wp-content/themes/badboybike/images/<br>
+                    📄 Имя файла: default-motorcycle-hero.jpg
+                </div>
+                
+                <ul class="steps">
+                    <li>
+                        <strong>Подготовьте изображение</strong><br>
+                        Размер: 1920x1080px, Формат: JPG, Вес: до 800KB
+                    </li>
+                    <li>
+                        <strong>Переименуйте файл</strong><br>
+                        Точное имя: <code>default-motorcycle-hero.jpg</code>
+                    </li>
+                    <li>
+                        <strong>Поместите в папку</strong><br>
+                        Скопируйте в <code>/images/</code> в папке темы
+                    </li>
+                </ul>
+                
+                <div class="success">
+                    <strong>✅ Отлично!</strong> Это изображение будет показываться для всех мотоциклов без установленного избранного изображения.
+                </div>
+            </div>
+            
+            <!-- Specifications -->
+            <div class="specs">
+                <h3>📸 Рекомендуемые параметры изображений</h3>
+                
+                <div class="spec-grid">
+                    <div class="spec-item">
+                        <span class="spec-label">Размер</span>
+                        <span class="spec-value">1920×1080px<br>(минимум)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Соотношение</span>
+                        <span class="spec-value">16:9<br>(альбомная)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Формат</span>
+                        <span class="spec-value">JPG<br>(для фото)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Размер файла</span>
+                        <span class="spec-value">300-800KB<br>(оптимизированный)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tips -->
+            <div class="tips">
+                <h3>💡 Советы по композиции</h3>
+                <ul class="tip-list">
+                    <li>Мотоцикл по центру или по правилу третей</li>
+                    <li>Хорошее освещение (золотой час идеален)</li>
+                    <li>Чистый, неперегруженный фон</li>
+                    <li>Высокий контраст между байком и фоном</li>
+                    <li>Резкий фокус на мотоцикле</li>
+                </ul>
+                
+                <h3 style="margin-top: 20px; color: #f44336;">⚠️ Чего избегать</h3>
+                <ul class="tip-list avoid-list">
+                    <li>Размытых или низкого качества фото</li>
+                    <li>Вертикальной ориентации (портретной)</li>
+                    <li>Водяных знаков и текстовых наложений</li>
+                    <li>Файлов тяжелее 2MB (медленная загрузка)</li>
+                </ul>
+            </div>
+            
+            <!-- Optimization Tools -->
+            <div class="specs">
+                <h3>🛠️ Инструменты для оптимизации</h3>
+                <p>Используйте эти сервисы перед загрузкой:</p>
+                
+                <div style="display: grid; gap: 15px; margin-top: 15px;">
+                    <div style="padding: 15px; background: #fff; border-radius: 8px;">
+                        <strong>TinyPNG</strong> - Бесплатное сжатие изображений<br>
+                        <a href="https://tinypng.com" target="_blank" class="btn">Открыть TinyPNG</a>
+                    </div>
+                    <div style="padding: 15px; background: #fff; border-radius: 8px;">
+                        <strong>Squoosh</strong> - Оптимизатор от Google<br>
+                        <a href="https://squoosh.app" target="_blank" class="btn">Открыть Squoosh</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Features -->
+            <div class="success">
+                <h3>⚡ Что включено в Hero секцию</h3>
+                <ul class="tip-list">
+                    <li>Parallax-эффект при прокрутке страницы</li>
+                    <li>Плавные анимации появления элементов</li>
+                    <li>Тёмный градиент для читабельности текста</li>
+                    <li>Полная адаптивность для всех устройств</li>
+                    <li>Автоматическое резервное изображение</li>
+                    <li>Оптимизация производительности</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Bad Boy Bike</strong> - Theme Documentation</p>
+            <p style="opacity: 0.7; margin-top: 10px;">Создано для улучшения вашего сайта 🏍️</p>
+        </div>
+    </div>
+</body>
+</html>
+

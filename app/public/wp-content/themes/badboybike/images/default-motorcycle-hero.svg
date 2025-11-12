@@ -1,0 +1,70 @@
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a1a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2d2d2d;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bikeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#404040;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#606060;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#404040;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="url(#bgGradient)"/>
+  
+  <!-- Grid pattern -->
+  <g opacity="0.05">
+    <path d="M0 0 L1920 0 L1920 1080 L0 1080 Z" stroke="#ffffff" stroke-width="0.5" fill="none"/>
+    <path d="M960 0 L960 1080" stroke="#ffffff" stroke-width="1"/>
+    <path d="M0 540 L1920 540" stroke="#ffffff" stroke-width="1"/>
+    <circle cx="960" cy="540" r="200" stroke="#ffffff" stroke-width="0.5" fill="none"/>
+    <circle cx="960" cy="540" r="300" stroke="#ffffff" stroke-width="0.5" fill="none"/>
+  </g>
+  
+  <!-- Motorcycle icon -->
+  <g transform="translate(960, 540)">
+    <!-- Wheels -->
+    <circle cx="-180" cy="100" r="80" fill="none" stroke="url(#bikeGradient)" stroke-width="12"/>
+    <circle cx="-180" cy="100" r="60" fill="none" stroke="#505050" stroke-width="8"/>
+    <circle cx="180" cy="100" r="80" fill="none" stroke="url(#bikeGradient)" stroke-width="12"/>
+    <circle cx="180" cy="100" r="60" fill="none" stroke="#505050" stroke-width="8"/>
+    
+    <!-- Frame -->
+    <path d="M -180 100 L -80 0 L 80 0 L 180 100" stroke="url(#bikeGradient)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <path d="M -80 0 L 0 -60 L 100 -40 L 180 100" stroke="url(#bikeGradient)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <path d="M -180 100 L 0 20 L 180 100" stroke="#505050" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    
+    <!-- Handlebars -->
+    <path d="M 80 0 L 120 -30" stroke="url(#bikeGradient)" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="120" cy="-30" r="15" fill="#606060"/>
+    
+    <!-- Seat -->
+    <ellipse cx="-20" cy="-20" rx="60" ry="30" fill="#505050"/>
+    
+    <!-- Tank -->
+    <ellipse cx="40" cy="-35" rx="50" ry="35" fill="url(#bikeGradient)"/>
+    
+    <!-- Exhaust -->
+    <path d="M 120 80 L 200 90" stroke="#404040" stroke-width="14" stroke-linecap="round"/>
+    <ellipse cx="205" cy="90" rx="8" ry="14" fill="#303030"/>
+  </g>
+  
+  <!-- Text -->
+  <text x="960" y="780" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#606060" text-anchor="middle">
+    BAD BOY BIKE
+  </text>
+  <text x="960" y="840" font-family="Arial, sans-serif" font-size="28" fill="#505050" text-anchor="middle">
+    Add Your Motorcycle Image Here
+  </text>
+  
+  <!-- Icon indicator -->
+  <g transform="translate(960, 900)">
+    <rect x="-80" y="-30" width="160" height="60" rx="30" fill="#404040"/>
+    <path d="M -30 -10 L -30 10 M -20 0 L -30 10 L -40 0" stroke="#808080" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <rect x="-10" y="-10" width="40" height="20" rx="2" fill="none" stroke="#808080" stroke-width="3"/>
+    <path d="M 10 -10 L 10 10 M 10 0 L 30 0" stroke="#808080" stroke-width="3" stroke-linecap="round"/>
+  </g>
+</svg>
