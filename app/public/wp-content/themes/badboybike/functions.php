@@ -55,6 +55,11 @@ function badboybike_scripts() {
     wp_enqueue_script('badboybike-parallax', get_template_directory_uri() . '/js/parallax.js', array(), '1.0.0', true);
     wp_enqueue_script('badboybike-main', get_template_directory_uri() . '/js/main.js', array(), '1.0.0', true);
     
+    // Gallery slider for homepage
+    if (is_front_page() || is_home()) {
+        wp_enqueue_script('badboybike-gallery-slider', get_template_directory_uri() . '/js/gallery-slider.js', array(), '1.0.0', true);
+    }
+    
     // Lightbox only on Gallery template
     if (is_page_template('template-gallery.php')) {
         wp_enqueue_script('badboybike-lightbox', get_template_directory_uri() . '/js/lightbox.js', array(), '1.0.0', true);
@@ -167,8 +172,18 @@ function badboybike_motorcycle_specs_callback($post) {
     $torque = get_post_meta($post->ID, '_motorcycle_torque', true);
     $weight = get_post_meta($post->ID, '_motorcycle_weight', true);
     $status = get_post_meta($post->ID, '_motorcycle_status', true);
+    $is_custom = get_post_meta($post->ID, 'is_custom', true);
+    $price = get_post_meta($post->ID, '_motorcycle_price', true);
     ?>
     <table class="form-table">
+        <tr>
+            <th><label for="is_custom">Custom Motorcycle</label></th>
+            <td>
+                <input type="checkbox" id="is_custom" name="is_custom" value="1" <?php checked($is_custom, '1'); ?>>
+                <label for="is_custom">Display this motorcycle on the Customs page</label>
+                <p class="description">Check this box to show this motorcycle as a custom build on the Customs page</p>
+            </td>
+        </tr>
         <tr>
             <th><label for="motorcycle_model">Model</label></th>
             <td><input type="text" id="motorcycle_model" name="motorcycle_model" value="<?php echo esc_attr($model); ?>" class="regular-text" placeholder="Harley-Davidson V-Rod"></td>
@@ -176,6 +191,13 @@ function badboybike_motorcycle_specs_callback($post) {
         <tr>
             <th><label for="motorcycle_year">Year</label></th>
             <td><input type="number" id="motorcycle_year" name="motorcycle_year" value="<?php echo esc_attr($year); ?>" class="regular-text" placeholder="2024"></td>
+        </tr>
+        <tr>
+            <th><label for="motorcycle_price">Price</label></th>
+            <td>
+                <input type="text" id="motorcycle_price" name="motorcycle_price" value="<?php echo esc_attr($price); ?>" class="regular-text" placeholder="$25,000">
+                <p class="description">Enter the price for this custom motorcycle (e.g., $25,000 or Contact for Price)</p>
+            </td>
         </tr>
         <tr>
             <th><label for="motorcycle_engine">Engine</label></th>
@@ -334,11 +356,18 @@ function badboybike_save_motorcycle_meta($post_id) {
     }
     
     // Save specifications
-    $fields = array('model', 'year', 'engine', 'power', 'torque', 'weight', 'status');
+    $fields = array('model', 'year', 'engine', 'power', 'torque', 'weight', 'status', 'price');
     foreach ($fields as $field) {
         if (isset($_POST['motorcycle_' . $field])) {
             update_post_meta($post_id, '_motorcycle_' . $field, sanitize_text_field($_POST['motorcycle_' . $field]));
         }
+    }
+    
+    // Save is_custom checkbox
+    if (isset($_POST['is_custom']) && $_POST['is_custom'] == '1') {
+        update_post_meta($post_id, 'is_custom', '1');
+    } else {
+        update_post_meta($post_id, 'is_custom', '0');
     }
     
     // Save modifications

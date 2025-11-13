@@ -46,12 +46,13 @@
 function badboybike_default_menu() {
     ?>
     <ul class="nav__list">
-        <li><a href="<?php echo esc_url(home_url('/')); ?>" class="nav__link active">HOME</a></li>
-        <li><a href="#about" class="nav__link">ABOUT</a></li>
-        <li><a href="#customs" class="nav__link">CUSTOMS</a></li>
-        <li><a href="#contact" class="nav__link">CONTACT</a></li>
+        <li><a href="<?php echo esc_url(home_url('/')); ?>" class="nav__link<?php echo is_front_page() ? ' active' : ''; ?>">HOME</a></li>
+        <li><a href="<?php echo esc_url(site_url('/customs/')); ?>" class="nav__link<?php echo is_page('customs') ? ' active' : ''; ?>">CUSTOMS</a></li> 
+        <li><a href="<?php echo esc_url(site_url('/about/')); ?>" class="nav__link<?php echo is_page('about') ? ' active' : ''; ?>">ABOUT</a></li>
+          
+        <li><a href="<?php echo esc_url(site_url('/contact/')); ?>" class="nav__link<?php echo is_page('contact') ? ' active' : ''; ?>">CONTACT</a></li>
     </ul>
     <?php
-}
+}   
 
 

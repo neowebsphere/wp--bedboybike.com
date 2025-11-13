@@ -16,8 +16,25 @@
 
     // Initialize parallax on page load
     function initParallax() {
-        // Set initial position
-        updateParallax();
+        // Ensure overlay is visible on load
+        parallaxElements.forEach(element => {
+            const overlay = element.querySelector('.parallax-overlay');
+            if (overlay) {
+                overlay.style.opacity = '1';
+                overlay.style.visibility = 'visible';
+            }
+            
+            // Set initial image position
+            const image = element.querySelector('.parallax-bg__image');
+            if (image) {
+                image.style.transform = 'translate3d(0, 0, 0) scale(1.2)';
+            }
+        });
+        
+        // Set initial position after a small delay to ensure DOM is ready
+        setTimeout(() => {
+            updateParallax();
+        }, 100);
         
         // Listen to scroll events
         window.addEventListener('scroll', handleScroll, { passive: true });
@@ -39,13 +56,28 @@
         parallaxElements.forEach(element => {
             const rect = element.getBoundingClientRect();
             const speed = parseFloat(element.dataset.speed) || 0.5;
-            const yPos = -(lastScrollY * speed);
             
-            // Only update if element is in viewport
-            if (rect.bottom >= 0 && rect.top <= window.innerHeight) {
+            // Calculate the offset based on the element's position relative to viewport
+            const elementTop = rect.top + lastScrollY;
+            const elementHeight = rect.height;
+            const windowHeight = window.innerHeight;
+            
+            // Calculate parallax offset
+            const scrolled = lastScrollY - (elementTop - windowHeight);
+            const yPos = -(scrolled * speed);
+            
+            // Only update if element is in viewport or near it
+            if (rect.bottom >= -100 && rect.top <= windowHeight + 100) {
                 const image = element.querySelector('.parallax-bg__image');
                 if (image) {
-                    image.style.transform = `translateY(${yPos}px) scale(1.2)`;
+                    // Use transform3d for better GPU acceleration
+                    image.style.transform = `translate3d(0, ${yPos}px, 0) scale(1.2)`;
+                }
+                
+                // Ensure overlay is visible
+                const overlay = element.querySelector('.parallax-overlay');
+                if (overlay && !overlay.style.opacity) {
+                    overlay.style.opacity = '1';
                 }
             }
         });
@@ -66,11 +98,25 @@
         const parallaxBg = aboutSection.querySelector('.parallax-bg');
         if (!parallaxBg) return;
         
+        // Ensure overlay exists and is visible
+        const overlay = parallaxBg.querySelector('.parallax-overlay');
+        if (overlay) {
+            overlay.style.opacity = '1';
+            overlay.style.visibility = 'visible';
+            // Add a smooth fade-in animation
+            overlay.style.transition = 'opacity 0.5s ease-in-out';
+        }
+        
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     // Add smooth transition when section comes into view
                     parallaxBg.style.transition = 'transform 0.1s ease-out';
+                    
+                    // Ensure overlay remains visible
+                    if (overlay) {
+                        overlay.style.opacity = '1';
+                    }
                 }
             });
         }, {
