@@ -19,13 +19,13 @@ get_header();
                 echo '<img src="' . esc_url($hero_image) . '" alt="Custom Harley-Davidson motorcycle" class="hero__bg-image">';
             } else {
                 // Check if default hero image exists
-                $default_hero_jpg = get_template_directory() . '/images/hero-bike.jpg';
-                $default_hero_fallback = get_template_directory() . '/images/default-hero.jpg';
+                $default_hero_jpg = get_template_directory() . '/images/hero/hero-bike.jpg';
+                $default_hero_fallback = get_template_directory() . '/images/hero/default-hero.svg';
                 
                 if (file_exists($default_hero_jpg)) {
-                    echo '<img src="' . get_template_directory_uri() . '/images/hero-bike.jpg" alt="Custom Harley-Davidson motorcycle" class="hero__bg-image">';
+                    echo '<img src="' . get_template_directory_uri() . '/images/hero/hero-bike.jpg" alt="Custom Harley-Davidson motorcycle" class="hero__bg-image">';
                 } elseif (file_exists($default_hero_fallback)) {
-                    echo '<img src="' . get_template_directory_uri() . '/images/default-hero.jpg" alt="Custom Harley-Davidson motorcycle" class="hero__bg-image">';
+                    echo '<img src="' . get_template_directory_uri() . '/images/hero/default-hero.svg" alt="Custom Harley-Davidson motorcycle" class="hero__bg-image">';
                 }
             }
             ?>
@@ -112,30 +112,42 @@ get_header();
             <!-- Feature 1: Custom Motorcycles -->
             <article class="feature-card">
                 <div class="feature-card__background">
-                    <img src="<?php echo get_template_directory_uri(); ?>/images/feature-custom.jpg" alt="Custom Motorcycles">
+                    <?php 
+                    $feature1_image = get_theme_mod('badboybike_feature1_image', get_template_directory_uri() . '/images/featured/feature-custom.webp');
+                    $feature1_title = get_theme_mod('badboybike_feature1_title', 'CUSTOM<br>MOTORCYCLES');
+                    ?>
+                    <img src="<?php echo esc_url($feature1_image); ?>" alt="Custom Motorcycles">
                 </div>
                 <div class="feature-card__overlay">
-                    <h2 class="feature-card__title">CUSTOM<br>MOTORCYCLES</h2>
+                    <h2 class="feature-card__title"><?php echo wp_kses_post($feature1_title); ?></h2>
                 </div>
             </article>
             
             <!-- Feature 2: Parts & Accessories -->
             <article class="feature-card">
                 <div class="feature-card__background">
-                    <img src="<?php echo get_template_directory_uri(); ?>/images/feature-parts.jpg" alt="Parts and Accessories">
+                    <?php 
+                    $feature2_image = get_theme_mod('badboybike_feature2_image', get_template_directory_uri() . '/images/featured/feature-parts.webp');
+                    $feature2_title = get_theme_mod('badboybike_feature2_title', 'PARTS &<br>ACCESSORIES');
+                    ?>
+                    <img src="<?php echo esc_url($feature2_image); ?>" alt="Parts and Accessories">
                 </div>
                 <div class="feature-card__overlay">
-                    <h2 class="feature-card__title">PARTS &<br>ACCESSORIES</h2>
+                    <h2 class="feature-card__title"><?php echo wp_kses_post($feature2_title); ?></h2>
                 </div>
             </article>
             
             <!-- Feature 3: About Us -->
             <article class="feature-card">
                 <div class="feature-card__background">
-                    <img src="<?php echo get_template_directory_uri(); ?>/images/feature-about.jpg" alt="About Us">
+                    <?php 
+                    $feature3_image = get_theme_mod('badboybike_feature3_image', get_template_directory_uri() . '/images/featured/feature-about.webp');
+                    $feature3_title = get_theme_mod('badboybike_feature3_title', 'ABOUT<br>US');
+                    ?>
+                    <img src="<?php echo esc_url($feature3_image); ?>" alt="About Us">
                 </div>
                 <div class="feature-card__overlay">
-                    <h2 class="feature-card__title">ABOUT<br>US</h2>
+                    <h2 class="feature-card__title"><?php echo wp_kses_post($feature3_title); ?></h2>
                 </div>
             </article>
         </div>
@@ -143,31 +155,43 @@ get_header();
 </section>
 
 <!-- ABOUT SECTION -->
-<section class="about" id="about">
-    <div class="container about__container">
-        <h2 class="section-title"><?php echo get_theme_mod('badboybike_about_title', 'About Bad Boy Bike'); ?></h2>
-        <?php
-        $about_content = get_theme_mod('badboybike_about_content');
-        if ($about_content) {
-            echo wpautop($about_content);
-        } else {
-            ?>
-            <p class="about__text">
-                We are a premium Harley-Davidson custom shop dedicated to creating unique, one-of-a-kind motorcycles 
-                that reflect your personal style and vision. With years of experience and a passion for perfection, 
-                we transform standard bikes into extraordinary machines.
-            </p>
-            <p class="about__text">
-                Every custom build is a collaboration between our expert craftsmen and you. From concept to completion, 
-                we ensure every detail is meticulously crafted to exceed your expectations.
-            </p>
-            <p class="about__text">
-                Our shop specializes in full custom builds, performance upgrades, custom paint, and premium modifications 
-                that make your bike truly unique.
-            </p>
-            <?php
-        }
+<section class="about parallax-section" id="about">
+    <?php
+    $about_bg_image = get_theme_mod('badboybike_about_bg_image');
+    if ($about_bg_image) {
         ?>
+        <div class="parallax-bg" data-parallax="scroll" data-speed="0.5">
+            <img src="<?php echo esc_url($about_bg_image); ?>" alt="About section background" class="parallax-bg__image">
+        </div>
+        <?php
+    }
+    ?>
+    <div class="parallax-content">
+        <div class="container about__container">
+            <h2 class="section-title"><?php echo get_theme_mod('badboybike_about_title', 'About Bad Boy Bike'); ?></h2>
+            <?php
+            $about_content = get_theme_mod('badboybike_about_content');
+            if ($about_content) {
+                echo wpautop($about_content);
+            } else {
+                ?>
+                <p class="about__text">
+                    We are a premium Harley-Davidson custom shop dedicated to creating unique, one-of-a-kind motorcycles 
+                    that reflect your personal style and vision. With years of experience and a passion for perfection, 
+                    we transform standard bikes into extraordinary machines.
+                </p>
+                <p class="about__text">
+                    Every custom build is a collaboration between our expert craftsmen and you. From concept to completion, 
+                    we ensure every detail is meticulously crafted to exceed your expectations.
+                </p>
+                <p class="about__text">
+                    Our shop specializes in full custom builds, performance upgrades, custom paint, and premium modifications 
+                    that make your bike truly unique.
+                </p>
+                <?php
+            }
+            ?>
+        </div>
     </div>
 </section>
 

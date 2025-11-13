@@ -52,6 +52,7 @@ function badboybike_scripts() {
     wp_enqueue_script('badboybike-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '1.0.0', true);
     wp_enqueue_script('badboybike-gallery', get_template_directory_uri() . '/js/gallery.js', array(), '1.0.0', true);
     wp_enqueue_script('badboybike-modal', get_template_directory_uri() . '/js/modal.js', array(), '1.0.0', true);
+    wp_enqueue_script('badboybike-parallax', get_template_directory_uri() . '/js/parallax.js', array(), '1.0.0', true);
     wp_enqueue_script('badboybike-main', get_template_directory_uri() . '/js/main.js', array(), '1.0.0', true);
     
     // Lightbox only on Gallery template
@@ -468,4 +469,216 @@ function badboybike_handle_contact_form() {
 }
 add_action('wp_ajax_badboybike_contact', 'badboybike_handle_contact_form');
 add_action('wp_ajax_nopriv_badboybike_contact', 'badboybike_handle_contact_form');
+
+// Theme Customizer Settings
+function badboybike_customize_register($wp_customize) {
+    // Features Section
+    $wp_customize->add_section('badboybike_features', array(
+        'title' => 'Feature Cards',
+        'description' => 'Customize the feature cards on the homepage',
+        'priority' => 30,
+    ));
+    
+    // Feature Card 1: Custom Motorcycles
+    $wp_customize->add_setting('badboybike_feature1_image', array(
+        'default' => get_template_directory_uri() . '/images/featured/feature-custom.webp',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'badboybike_feature1_image', array(
+        'label' => 'Custom Motorcycles - Image',
+        'description' => 'Recommended size: 800x600px',
+        'section' => 'badboybike_features',
+        'settings' => 'badboybike_feature1_image',
+        'priority' => 10,
+    )));
+    
+    $wp_customize->add_setting('badboybike_feature1_title', array(
+        'default' => 'CUSTOM<br>MOTORCYCLES',
+        'sanitize_callback' => 'wp_kses_post',
+    ));
+    
+    $wp_customize->add_control('badboybike_feature1_title', array(
+        'label' => 'Custom Motorcycles - Title',
+        'description' => 'Use <br> for line breaks',
+        'section' => 'badboybike_features',
+        'type' => 'text',
+        'priority' => 11,
+    ));
+    
+    // Feature Card 2: Parts & Accessories
+    $wp_customize->add_setting('badboybike_feature2_image', array(
+        'default' => get_template_directory_uri() . '/images/featured/feature-parts.webp',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'badboybike_feature2_image', array(
+        'label' => 'Parts & Accessories - Image',
+        'description' => 'Recommended size: 800x600px',
+        'section' => 'badboybike_features',
+        'settings' => 'badboybike_feature2_image',
+        'priority' => 20,
+    )));
+    
+    $wp_customize->add_setting('badboybike_feature2_title', array(
+        'default' => 'PARTS &<br>ACCESSORIES',
+        'sanitize_callback' => 'wp_kses_post',
+    ));
+    
+    $wp_customize->add_control('badboybike_feature2_title', array(
+        'label' => 'Parts & Accessories - Title',
+        'description' => 'Use <br> for line breaks',
+        'section' => 'badboybike_features',
+        'type' => 'text',
+        'priority' => 21,
+    ));
+    
+    // Feature Card 3: About Us
+    $wp_customize->add_setting('badboybike_feature3_image', array(
+        'default' => get_template_directory_uri() . '/images/featured/feature-about.webp',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'badboybike_feature3_image', array(
+        'label' => 'About Us - Image',
+        'description' => 'Recommended size: 800x600px',
+        'section' => 'badboybike_features',
+        'settings' => 'badboybike_feature3_image',
+        'priority' => 30,
+    )));
+    
+    $wp_customize->add_setting('badboybike_feature3_title', array(
+        'default' => 'ABOUT<br>US',
+        'sanitize_callback' => 'wp_kses_post',
+    ));
+    
+    $wp_customize->add_control('badboybike_feature3_title', array(
+        'label' => 'About Us - Title',
+        'description' => 'Use <br> for line breaks',
+        'section' => 'badboybike_features',
+        'type' => 'text',
+        'priority' => 31,
+    ));
+    
+    // Hero Section
+    $wp_customize->add_section('badboybike_hero', array(
+        'title' => 'Hero Section',
+        'description' => 'Customize the hero section',
+        'priority' => 20,
+    ));
+    
+    $wp_customize->add_setting('badboybike_hero_image', array(
+        'default' => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'badboybike_hero_image', array(
+        'label' => 'Hero Background Image',
+        'section' => 'badboybike_hero',
+        'settings' => 'badboybike_hero_image',
+    )));
+    
+    $wp_customize->add_setting('badboybike_hero_title', array(
+        'default' => 'HARLEY-DAVIDSON<br>CUSTOM SHOP',
+        'sanitize_callback' => 'wp_kses_post',
+    ));
+    
+    $wp_customize->add_control('badboybike_hero_title', array(
+        'label' => 'Hero Title',
+        'section' => 'badboybike_hero',
+        'type' => 'text',
+    ));
+    
+    $wp_customize->add_setting('badboybike_hero_subtitle', array(
+        'default' => 'UNIQUE CUSTOM BIKES BUILT TO PERFECTION',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    
+    $wp_customize->add_control('badboybike_hero_subtitle', array(
+        'label' => 'Hero Subtitle',
+        'section' => 'badboybike_hero',
+        'type' => 'text',
+    ));
+    
+    // About Section
+    $wp_customize->add_section('badboybike_about', array(
+        'title' => 'About Section',
+        'priority' => 40,
+    ));
+    
+    $wp_customize->add_setting('badboybike_about_title', array(
+        'default' => 'About Bad Boy Bike',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    
+    $wp_customize->add_control('badboybike_about_title', array(
+        'label' => 'About Title',
+        'section' => 'badboybike_about',
+        'type' => 'text',
+    ));
+    
+    $wp_customize->add_setting('badboybike_about_content', array(
+        'default' => '',
+        'sanitize_callback' => 'wp_kses_post',
+    ));
+    
+    $wp_customize->add_control('badboybike_about_content', array(
+        'label' => 'About Content',
+        'section' => 'badboybike_about',
+        'type' => 'textarea',
+    ));
+    
+    // About Section Parallax Background
+    $wp_customize->add_setting('badboybike_about_bg_image', array(
+        'default' => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'badboybike_about_bg_image', array(
+        'label' => 'About Section Background Image (Parallax)',
+        'description' => 'Recommended size: 1920x1080px or larger for best parallax effect',
+        'section' => 'badboybike_about',
+        'settings' => 'badboybike_about_bg_image',
+    )));
+    
+    // Social Media
+    $wp_customize->add_section('badboybike_social', array(
+        'title' => 'Social Media',
+        'priority' => 50,
+    ));
+    
+    $wp_customize->add_setting('badboybike_facebook', array(
+        'default' => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    
+    $wp_customize->add_control('badboybike_facebook', array(
+        'label' => 'Facebook URL',
+        'section' => 'badboybike_social',
+        'type' => 'url',
+    ));
+    
+    $wp_customize->add_setting('badboybike_instagram', array(
+        'default' => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    
+    $wp_customize->add_control('badboybike_instagram', array(
+        'label' => 'Instagram URL',
+        'section' => 'badboybike_social',
+        'type' => 'url',
+    ));
+    
+    $wp_customize->add_setting('badboybike_youtube', array(
+        'default' => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    
+    $wp_customize->add_control('badboybike_youtube', array(
+        'label' => 'YouTube URL',
+        'section' => 'badboybike_social',
+        'type' => 'url',
+    ));
+}
+add_action('customize_register', 'badboybike_customize_register');
 

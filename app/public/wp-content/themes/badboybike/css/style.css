@@ -252,6 +252,43 @@
 .about {
   padding: var(--spacing-4xl) 0;
   background-color: var(--color-bg-secondary);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Parallax container */
+.parallax-section {
+  position: relative;
+  min-height: 600px;
+}
+
+.parallax-bg {
+  position: absolute;
+  top: -20%;
+  left: 0;
+  width: 100%;
+  height: 120%;
+  z-index: -1;
+  will-change: transform;
+}
+
+.parallax-bg__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.2);
+  will-change: transform;
+}
+
+.parallax-content {
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(to bottom, 
+    rgba(17, 17, 17, 0.85) 0%,
+    rgba(17, 17, 17, 0.95) 50%,
+    rgba(17, 17, 17, 0.85) 100%);
+  padding: var(--spacing-4xl) 0;
+  backdrop-filter: blur(2px);
 }
 
 .about__container {
